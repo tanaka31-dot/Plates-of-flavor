@@ -1,0 +1,27 @@
+<%= form_with(model: recipe) do |form| %>
+  <% if recipe.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(recipe.errors.count, "error") %> prohibited this recipe from being saved:</h2>
+
+      <ul>
+        <% recipe.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="row">
+  <div class="col-md-10 col-md-offset-8">
+      <%= form.label :recipe_name %>
+      <%= form.text_field :recipe_name, class: 'form-control'%>
+
+      <%= form.label :image%>
+      <%=form.file_field :image, class: 'form_control'%>
+
+      <%= link_to 'Add ingredients', new_ingredient_path%>
+
+      <%= form.submit "Create Recipe", class: "btn btn-primary" %>
+  </div>
+</div>
+<% end %>

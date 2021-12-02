@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Recipe name:</strong>
+  <%= @recipe.recipe_name %>
+</p>
+
+<p>
+  <strong>Author:</strong>
+  <%@user = User.find(@recipe.user_id)%>
+  <%= @user.username%>
+</p>
+
+<p>
+  <%=image_tag @recipe.image, height: 300%>
+</p>
+
+<div class = "row">
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Ingredients</h5>
+          <%@recipe.ingredients.all.each do |item|%>
+          <p class="card-text"><%= item.ingredient_name%></p>
+          <%end%>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Directions</h5>
+          <%@recipe.directions.all.each do |item|%>
+          <p class="card-text"><%= item.direction_content%></p>
+          <%end%>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<%= link_to 'Edit', edit_recipe_path(@recipe) %> |
+<%= link_to 'Back', recipes_path %>
