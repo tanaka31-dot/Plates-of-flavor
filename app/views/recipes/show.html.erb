@@ -1,3 +1,4 @@
+
 <p id="notice"><%= notice %></p>
 
 <p>
@@ -12,7 +13,7 @@
 </p>
 
 <p>
-  <%=image_tag @recipe.image, height: 300%>
+  <%=image_tag @recipe.image, height: 300, class: "img"%>
 </p>
 
 <div class = "row">
@@ -31,9 +32,13 @@
     <div class="card">
       <div class="card-body">
         <h5 class="card-title">Directions</h5>
+         <ol>
           <%@recipe.directions.all.each do |item|%>
-          <p class="card-text"><%= item.direction_content%></p>
+         
+           <p class="card-text"><li> <%=item.direction_content%> </li></p> 
+          
           <%end%>
+          </ol>
       </div>
     </div>
   </div>

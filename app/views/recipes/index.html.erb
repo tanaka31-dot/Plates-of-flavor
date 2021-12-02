@@ -2,22 +2,22 @@
 
 <h1>Recipes</h1>
 
-<%= link_to 'New Recipe', new_recipe_path %>
+<%= link_to 'New Recipe', new_recipe_path, class: "btn btn-primary mb-4" %>
 
 
 <div class = "row">
 <%@recipes.each do |recipe|%>
 <%@user = User.find(recipe.user_id)%>
   <div class="col-sm-3">
-    <div class="card">
-    <img class="card-img-top">
-    <%=image_tag recipe.image, height: 300%>
+    <div class="card zoom">
+    
+    <%=image_tag recipe.image, class: "card-image-top img2"%>
       <div class="card-body">
         <h5 class="card-title"><%= recipe.recipe_name %></h5>
         <h3 class = "card-subtitle"><%= @user.username %></h3>
-        <%= link_to 'Show', recipe %>
-        <%= link_to 'Edit', edit_recipe_path(recipe) %>
-        <%= link_to 'Destroy', recipe, method: :delete, data: { confirm: 'Are you sure?' } %>
+        <%= link_to 'Show', recipe, class: "btn btn-primary mt-2" %>
+        <%= link_to 'Edit', edit_recipe_path(recipe), class: "btn btn-primary mt-2" %>
+        <%= link_to 'Delete', recipe, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-primary mt-2" %>
       </div>
     </div>
   </div>
