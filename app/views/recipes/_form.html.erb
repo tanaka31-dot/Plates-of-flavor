@@ -16,14 +16,15 @@
       <%= form.label :recipe_name %>
       <%= form.text_field :recipe_name, class: 'form-control'%>
 
+      
       <%= form.label :image%>
-      <%=form.file_field :image, class: 'form_control'%>
-
-      <%= link_to 'Add ingredients', new_ingredient_path%>
-
-      <%=link_to 'Add directions', new_direction_path%>
-
-      <%= form.submit "Create Recipe", class: "btn btn-primary" %>
+      <%=form.file_field :image, class: 'form_control mt-4'%>
+   </div>
   </div>
-</div>
+
+      <%= link_to 'Add ingredients', new_ingredient_path, class: "btn btn-primary mt-4"%>
+
+      <%=link_to 'Add directions', new_direction_path, class: "btn btn-primary mt-4"%>
+
+      <%= form.submit "Create Recipe", class: "btn btn-primary mt-4" %>
 <% end %>

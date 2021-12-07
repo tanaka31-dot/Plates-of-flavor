@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[ show edit update destroy ]
+  before_action :authenticate_user, except: [:new, :create]
+  before_action :correct_user,   only: [:edit, :update]
 
   # GET /users or /users.json
   def index
@@ -22,6 +24,7 @@ class UsersController < ApplicationController
   # POST /users or /users.json
   def create
     @user = User.new(user_params)
+    @user.password = user_params[:password_hash]
 
     respond_to do |format|
       if @user.save
@@ -37,7 +40,9 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1 or /users/1.json
   def update
     respond_to do |format|
-      if @user.update(user_params)
+    @user.assign_attributes(user_params)
+    @user.password = user_params[:password_hash]
+      if @user.save
         format.html { redirect_to @user, notice: "User was successfully updated." }
         format.json { render :show, status: :ok, location: @user }
       else
@@ -51,6 +56,7 @@ class UsersController < ApplicationController
   def destroy
     @user.destroy
     respond_to do |format|
+      reset_session
       format.html { redirect_to users_url, notice: "User was successfully destroyed." }
       format.json { head :no_content }
     end
@@ -64,6 +70,11 @@ class UsersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.require(:user).permit(:first_name, :last_name, :username, :password_hash)
+      params.require(:user).permit(:first_name, :last_name, :username, :password_hash, :image)
+    end
+
+    def correct_user
+      @user = User.find(params[:id])
+      redirect_to(users_url) unless @user == current_user
     end
 end

@@ -39,6 +39,11 @@
     font-family: 'Gentium Basic', serif;
 }
 
+.author {
+  color:#808080;
+  font-size: small;
+}
+
 
 li {
     line-height: 1.5;
@@ -50,7 +55,10 @@ li {
     border-radius: 2em;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
   }
-
+  
+  .profile {
+    width:100vh;
+  }
   .zoom {
     transition: transform .2s; /* Animation */
   }
@@ -74,3 +82,32 @@ li {
     border-radius: 2em;
   }
 
+  .avatar {
+  border-radius: 100%;
+   width: 35px;
+   height: 35px;
+   margin-right: 6px;
+  }
+
+  .avatar1 {
+   width: 30px;
+   height: 30px;
+   margin-right: 6px;
+  }
+
+
+  .profile_img {
+    border-radius: 100%;
+  }
+
+ .right {
+    width: 65%;
+  }
+
+ .left {
+    width: 25%;
+  }
+
+
+
+  

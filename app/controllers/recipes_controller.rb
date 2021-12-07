@@ -1,5 +1,7 @@
 class RecipesController < ApplicationController
   before_action :set_recipe, only: %i[ show edit update destroy ]
+  before_action :authenticate_user
+  before_action :correct_user, only: [:edit, :update]
 
   # GET /recipes or /recipes.json
   def index
@@ -22,11 +24,10 @@ class RecipesController < ApplicationController
   # POST /recipes or /recipes.json
   def create
     @recipe = Recipe.new(recipe_params)
-    @user = User.find(1)
-    @recipe.user = @user
 
     respond_to do |format|
       if @recipe.save
+        @recipe.author = current_user
         format.html { redirect_to @recipe, notice: "Recipe was successfully created." }
         format.json { render :show, status: :created, location: @recipe }
       else
@@ -66,6 +67,11 @@ class RecipesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def recipe_params
-      params.require(:recipe).permit(:recipe_name, :user_id, :image)
+      params.require(:recipe).permit(:recipe_name , :image)
+    end
+    
+    def correct_user
+      @recipe = Recipe.find(params[:id])
+      redirect_to(recipes_url) unless @recipe.author == current_user
     end
 end

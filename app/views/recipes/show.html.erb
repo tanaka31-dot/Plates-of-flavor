@@ -7,9 +7,8 @@
 </p>
 
 <p>
-  <strong>Author:</strong>
-  <%@user = User.find(@recipe.user_id)%>
-  <%= @user.username%>
+  <strong>Author: </strong> 
+  <%=@recipe.author.full_name%>
 </p>
 
 <p>
@@ -44,6 +43,7 @@
   </div>
 </div>
 
-
-<%= link_to 'Edit', edit_recipe_path(@recipe) %> |
-<%= link_to 'Back', recipes_path %>
+<%if current_user == @recipe.author%>
+<%= link_to 'Edit', edit_recipe_path(@recipe), class: "btn btn-primary mt-4 mb-4" %>
+<%end%>
+<%= link_to 'Back', recipes_path, class: "btn btn-primary mt-4 mb-4" %>
